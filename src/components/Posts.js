@@ -7,16 +7,16 @@ import { Button, Container, Paper } from '@mui/material';
 export default function Posts() {
 
     const paperStyle = {padding:'50px 20px',width:600, margin:'200px auto'}
-    const [usernameOrEmail,setusernameOrEmail] = useState('');
+    const [userName,setUserName] = useState('');
     const [password,setPassword]= useState('');
     const handlePost = (e)=>{
       e.preventDefault()
-      const post = {usernameOrEmail,password}
+      const post = {userName,password}
       console.log(post);
       //ajax library
-      fetch('http://localhost:8080/api/auth/login',{
+      fetch('http://localhost:8080/api/auth/signin',{
       method:"POST",
-      headers:{"Content-Type":"application/json"},
+      Headers:{"Content-Type":"application/json"},
       body:JSON.stringify(post)
     }).then(()=>{
       console.log("Login Successfull")
@@ -35,15 +35,15 @@ export default function Posts() {
             noValidate
             autoComplete="off"
             >
-            <TextField id="standard-basic" label="usernameOrEmail" variant="standard" fullWidth
-            value={usernameOrEmail}
-            onChange={(e)=>setusernameOrEmail(e.target.value)}/>
-            <TextField id="standard-basic" label="password" variant="standard"  fullWidth
+            <TextField id="standard-basic" label="Post Subject" variant="standard" fullWidth
+            value={userName}
+            onChange={(e)=>setUserName(e.target.value)}/>
+            <TextField id="standard-basic" label="Post Description" variant="standard"  fullWidth
             value={password}
             onChange={(e)=>setPassword(e.target.value)}/>
             <Button variant="contained" color="secondary"onClick={handlePost}>Login</Button>
             </Box>
-            {usernameOrEmail}
+            {userName}
             {password}
         </Paper>
     </Container>
